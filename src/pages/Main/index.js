@@ -34,8 +34,14 @@ export default class Main extends Component {
     }
   }
 
-  handleDelete = () => {
-    alert('DELETE');
+  handleDelete(repository) {
+    //const { repositories } = this.state;
+    this.setState(prevState => ({
+      repositories: prevState.repositories.filter(repos => repos.name !== repository)
+    }))
+
+    console.log(repository);
+
   };
 
   handleInputChange = e => {
@@ -125,7 +131,7 @@ export default class Main extends Component {
                   <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
                     Details
                   </Link>
-                  <DeleteButton onClick={this.handleDelete}>
+                  <DeleteButton onClick={() => this.handleDelete(repo.name)}>
                     <FaTrash />
                   </DeleteButton>
                 </div>
